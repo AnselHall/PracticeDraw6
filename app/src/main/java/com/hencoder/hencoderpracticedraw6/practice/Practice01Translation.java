@@ -1,5 +1,6 @@
 package com.hencoder.hencoderpracticedraw6.practice;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Outline;
 import android.graphics.Path;
@@ -21,6 +22,9 @@ import static com.hencoder.hencoderpracticedraw6.Utils.dpToPixel;
 public class Practice01Translation extends RelativeLayout {
     Button animateBt;
     ImageView imageView;
+
+    private int CLICKCODE = 0;
+
 
     public Practice01Translation(Context context) {
         super(context);
@@ -46,9 +50,39 @@ public class Practice01Translation extends RelativeLayout {
         }
 
         animateBt.setOnClickListener(new OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(final View v) {
                 // TODO 在这里处理点击事件，通过 View.animate().translationX/Y/Z() 来让 View 平移
+                switch (CLICKCODE) {
+                    case 0:
+                        imageView.animate().translationX(300);
+                        break;
+                    case 1:
+                        imageView.animate().translationX(0);
+                        break;
+                    case 2:
+                        imageView.animate().translationY(200);
+                        break;
+                    case 3:
+                        imageView.animate().translationY(0);
+                        break;
+                    case 4:
+                        imageView.animate().translationZ(40);
+                        break;
+                    case 5:
+                        imageView.animate().translationZ(0);
+                        break;
+                    default:
+                        CLICKCODE = -1;
+                        break;
+                }
+                if (CLICKCODE == 5) {
+                    CLICKCODE = 0;
+                } else {
+                    CLICKCODE++;
+                }
+
             }
         });
     }
